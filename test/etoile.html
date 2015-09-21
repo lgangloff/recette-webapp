@@ -1,0 +1,99 @@
+<html>
+
+	<head>
+	
+		<style>
+			#notation *{
+				margin: 0;
+				padding: 0;
+			}
+			#notation li{
+				float: left;
+				width: 19px;
+				display: block;
+				height: 18px;
+				text-align: center;
+			}
+			#notation ul{
+				list-style-type: none;
+				clear: both;
+			}
+			#notation .note_etoile li{
+				background: url('etoile_off.png');
+			}
+			
+			#notation .note_etoile li.on{
+				background: url('etoile_on.png');
+			}
+			#notation .note_etoile li.note0{
+				background: none;
+			}
+			
+		</style>
+	
+	</head>
+	
+	<body>
+		<div id="notation">
+			<ul class="note_etoile">
+				<li id="note_0" class="note0"></li>
+				<li id="note_1"></li>
+				<li id="note_2"></li>
+				<li id="note_3"></li>
+				<li id="note_4"></li>
+				<li id="note_5"></li>		
+				<li id="note_6"></li>		
+			</ul>
+			<ul class="note_value">
+				<li><input id="note_value_0" type="radio" name="note"/></li>
+				<li><input id="note_value_1" type="radio" name="note"/></li>
+				<li><input id="note_value_2" type="radio" name="note"/></li>
+				<li><input id="note_value_3" type="radio" checked name="note"/></li>
+				<li><input id="note_value_4" type="radio" name="note"/></li>
+				<li><input id="note_value_5" type="radio" name="note"/></li>	
+				<li><input id="note_value_6" type="radio" name="note"/></li>	
+			</ul>
+		</div>
+	
+		<script type="text/javascript">
+			onmouseout();
+			for(i=0;i<=10;i++){
+				document.getElementById("note_"+i).onmouseover = function(){onmouseover(this)};
+				document.getElementById("note_"+i).onmouseout = function(){onmouseout()};
+				document.getElementById("note_"+i).onclick = function(){onclick(this)};
+			}
+			var over;
+			function onmouseover(el){
+				over = true;
+				max = el.id.substr(el.id.length-1,el.id.length);
+				for(i=1;i<=6;i++){
+					if (i<=max)
+						document.getElementById("note_"+i).className="on";
+					else
+						document.getElementById("note_"+i).className="";
+				}
+			}
+			function onmouseout(){
+				iSelected=0;
+				for(i=0;i<=6;i++){
+					if(document.getElementById("note_value_"+i).checked){
+						iSelected = i;
+						break;
+					}
+				}
+				for(i=1;i<=6;i++){
+					if (i<=iSelected)
+						document.getElementById("note_"+i).className="on";
+					else
+						document.getElementById("note_"+i).className="";
+				}
+			}
+			function onclick(el){
+				max = el.id.substr(el.id.length-1,el.id.length);
+				document.getElementById("note_value_"+max).checked = true;
+			}
+        </script>
+
+	</body>
+
+</html>
